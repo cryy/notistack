@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import clsx from 'clsx';
+import { ClassNameMap, SnackbarProviderProps as ProviderProps, RequiredBy, SharedProps, TransitionHandlerProps } from '../index';
+import { DEFAULTS, REASONS, objectMerge, transformer } from '../utils/constants';
+import React, { useEffect, useRef, useState } from 'react';
 import { emphasize, styled } from '@mui/material/styles';
+
 import Collapse from '@mui/material/Collapse';
-import type { SnackbarClassKey } from '@mui/material';
-import SnackbarContent from '../SnackbarContent';
-import { getTransitionDirection } from './SnackbarItem.util';
-import { REASONS, objectMerge, DEFAULTS, transformer } from '../utils/constants';
-import { SharedProps, RequiredBy, TransitionHandlerProps, SnackbarProviderProps as ProviderProps, ClassNameMap } from '../index';
-import defaultIconVariants from '../utils/defaultIconVariants';
-import createChainedFunction from '../utils/createChainedFunction';
 import { Snack } from '../SnackbarProvider';
 import Snackbar from './Snackbar';
+import type { SnackbarClassKey } from '@mui/material';
+import SnackbarContent from '../SnackbarContent';
+import clsx from 'clsx';
+import createChainedFunction from '../utils/createChainedFunction';
+import defaultIconVariants from '../utils/defaultIconVariants';
+import { getTransitionDirection } from './SnackbarItem.util';
 
 const componentName = 'SnackbarItem';
 
@@ -28,7 +29,11 @@ const classes = {
 
 const StyledSnackbar = styled(Snackbar)(({ theme }) => {
     const mode = theme.palette.mode || theme.palette.type;
-    const backgroundColor = emphasize(theme.palette.background.default, mode === 'light' ? 0.8 : 0.98);
+    let themeBackgroundColor = theme.palette.background.default;
+    if(themeBackgroundColor.startsWith("linear-gradient")) {
+        themeBackgroundColor = themeBackgroundColor.split(", ").at(-1).split(" ")[0];
+    }
+    const backgroundColor = emphasize(themeBackgroundColor, mode === 'light' ? 0.8 : 0.98);
 
     return {
         [`&.${classes.wrappedRoot}`]: {
