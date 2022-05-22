@@ -30,7 +30,8 @@ const StyledSnackbar = styled(Snackbar)(({ theme }) => {
     const mode = theme.palette.mode || theme.palette.type;
     let themeBackgroundColor = theme.palette.background.default;
     if(themeBackgroundColor.startsWith("linear-gradient")) {
-        themeBackgroundColor = themeBackgroundColor.split(", ").at(-1).split(" ")[0];
+        const splitArray = themeBackgroundColor.split(", ");
+        themeBackgroundColor = splitArray[splitArray.length - 1].split(" ")[0];
     }
     const backgroundColor = emphasize(themeBackgroundColor, mode === 'light' ? 0.8 : 0.98);
 
