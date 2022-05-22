@@ -1,17 +1,16 @@
-import { ClassNameMap, SnackbarProviderProps as ProviderProps, RequiredBy, SharedProps, TransitionHandlerProps } from '../index';
-import { DEFAULTS, REASONS, objectMerge, transformer } from '../utils/constants';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import clsx from 'clsx';
 import { emphasize, styled } from '@mui/material/styles';
-
 import Collapse from '@mui/material/Collapse';
-import { Snack } from '../SnackbarProvider';
-import Snackbar from './Snackbar';
 import type { SnackbarClassKey } from '@mui/material';
 import SnackbarContent from '../SnackbarContent';
-import clsx from 'clsx';
-import createChainedFunction from '../utils/createChainedFunction';
-import defaultIconVariants from '../utils/defaultIconVariants';
 import { getTransitionDirection } from './SnackbarItem.util';
+import { REASONS, objectMerge, DEFAULTS, transformer } from '../utils/constants';
+import { SharedProps, RequiredBy, TransitionHandlerProps, SnackbarProviderProps as ProviderProps, ClassNameMap } from '../index';
+import defaultIconVariants from '../utils/defaultIconVariants';
+import createChainedFunction from '../utils/createChainedFunction';
+import { Snack } from '../SnackbarProvider';
+import Snackbar from './Snackbar';
 
 const componentName = 'SnackbarItem';
 
